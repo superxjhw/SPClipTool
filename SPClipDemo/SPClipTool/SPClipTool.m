@@ -15,7 +15,6 @@ SingletonM(ClipTool)
 
 - (void)sp_clipOriginImage:(UIImage *)originImage complete:(void(^)(UIImage *image))completeBlock {
     SPClipViewController *clipVC = [[SPClipViewController alloc] init];
-    NSLog(@"SuperLog------ %@",clipVC);
     clipVC.originImage = originImage;
     clipVC.complete = completeBlock;
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:clipVC animated:YES completion:nil];
