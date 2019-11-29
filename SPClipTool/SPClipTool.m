@@ -17,7 +17,15 @@ SingletonM(ClipTool)
     SPClipViewController *clipVC = [[SPClipViewController alloc] init];
     clipVC.originImage = originImage;
     clipVC.complete = completeBlock;
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:clipVC animated:YES completion:nil];
+    UIViewController *currentVC;
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    if (window.rootViewController.presentedViewController){
+     currentVC = window.rootViewController.presentedViewController;
+    }else {
+     currentVC = window.rootViewController;
+    }
+    [currentVC presentViewController:clipVC animated:YES completion:nil];
 }
 
 @end
