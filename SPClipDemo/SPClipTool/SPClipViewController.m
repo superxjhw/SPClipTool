@@ -48,7 +48,7 @@ CGFloat lastScale = 1.0;
     backgroudImageView.layer.mask.frame = backgroudImageView.bounds;
     backgroudImageView.layer.mask.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5].CGColor;
     
-    // clipImageVieww
+    // clipImageView
     UIImageView *clipImageView = [[UIImageView alloc] initWithFrame:backgroudImageView.frame];
     clipImageView.userInteractionEnabled = YES;
     clipImageView.image = backgroudImageView.image;
