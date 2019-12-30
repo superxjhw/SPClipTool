@@ -210,11 +210,11 @@ CGFloat lastScale = 1.0;
     CGFloat borderW = 1;
     CGImageRef cgClipImage = CGImageCreateWithImageInRect(cgImage, CGRectMake((rect.origin.x + borderW / 2) * image.scale, (rect.origin.y + borderW / 2) * image.scale, (rect.size.width - borderW) * image.scale, (rect.size.height - borderW) * image.scale));
     UIGraphicsEndImageContext();
-    if (self.complete) {
-        self.complete([UIImage imageWithCGImage:cgClipImage]);
-
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (self.complete) {
+            self.complete([UIImage imageWithCGImage:cgClipImage]);
+        }
+    }];
 }
 
 @end
