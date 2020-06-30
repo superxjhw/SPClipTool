@@ -57,8 +57,6 @@ CGFloat lastScale = 1.0;
     self.clipImageView = clipImageView;
     clipImageView.layer.mask = [[CALayer alloc] init];
     clipImageView.layer.mask.backgroundColor = [UIColor whiteColor].CGColor;
-    clipImageView.layer.mask.borderColor = [UIColor whiteColor].CGColor;
-    clipImageView.layer.mask.borderWidth = 1;
     [clipImageView.layer.mask removeAllAnimations];
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(imagePan:)];
@@ -206,8 +204,8 @@ CGFloat lastScale = 1.0;
     CGImageRef cgImage = [image CGImage];
     CGRect rect = [self.clipImageView convertRect:self.clipImageView.layer.mask.frame toView:self.view];
     
-    // 边框线条宽度值
-    CGFloat borderW = 1;
+    // 边框线条宽度值 +2 处理截图出来的白色边框, 原因暂未排查出来
+    CGFloat borderW = 1 + 2;
     CGImageRef cgClipImage = CGImageCreateWithImageInRect(cgImage, CGRectMake((rect.origin.x + borderW / 2) * image.scale, (rect.origin.y + borderW / 2) * image.scale, (rect.size.width - borderW) * image.scale, (rect.size.height - borderW) * image.scale));
     UIGraphicsEndImageContext();
     [self dismissViewControllerAnimated:YES completion:^{

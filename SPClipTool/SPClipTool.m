@@ -17,15 +17,20 @@ SingletonM(ClipTool)
     SPClipViewController *clipVC = [[SPClipViewController alloc] init];
     clipVC.originImage = originImage;
     clipVC.complete = completeBlock;
-    UIViewController *currentVC;
-    
+    [[self topPresentedViewController] presentViewController:clipVC animated:YES completion:nil];
+}
+
+- (UIViewController *)topPresentedViewController {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    if (window.rootViewController.presentedViewController){
-     currentVC = window.rootViewController.presentedViewController;
+    return [self topPresentedViewController:window.rootViewController];
+}
+
+- (UIViewController *)topPresentedViewController:(UIViewController *)vc {
+    if (vc.presentedViewController) {
+        return [self topPresentedViewController:vc.presentedViewController];
     }else {
-     currentVC = window.rootViewController;
+        return vc;
     }
-    [currentVC presentViewController:clipVC animated:YES completion:nil];
 }
 
 @end
